@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .question-container {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .button-yes {
+            background-color: #4caf50;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        .button-no {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ce7a7a;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: rgb(0, 0, 0);
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuesta Sí</title>
+</head>
+<body>
+    <div class="question-container">
+        <h2>Hola</h2>
+        <p>Necesito decirte algo</p>
+        <!-- Agrega un span para mostrar el temporizador -->
+        <p>Despues de esto se desbloqueara el enlace</p>
+        <span id="countdown">Faltan: </span>
+        
+        <button id="redirectButton" class="button hidden" onclick="redirectToNewPage()">Ir a otra página</button>
+
+    <script>
+        // Función para mostrar el contador de cuenta regresiva
+        function showCountdown() {
+            const countdownElement = document.getElementById("countdown");
+            const targetDate = new Date("2023-09-06 22:35:00"); // Cambia esta fecha a la fecha deseada
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeDifference = targetDate - now;
+            
+                if (timeDifference > 0) {
+                    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+                    countdownElement.textContent = `Faltan: ${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+                } else {
+                    countdownElement.textContent = "El tiempo ha expirado";
+                    // Mostrar el botón al finalizar el temporizador
+                    const redirectButton = document.getElementById("redirectButton");
+                    redirectButton.classList.remove("hidden");
+                }
+            }
+            
+
+            // Actualizar el temporizador cada segundo
+            setInterval(updateCountdown, 1000);
+
+            // Llamar a la función inicialmente para mostrar el temporizador
+            updateCountdown();
+        }
+
+        // Redirigir a la nueva página cuando se hace clic en el botón
+        function redirectToNewPage() {
+            window.location.href = "https://astro-1906.github.io/html/";
+        }
+        
+        // Llamar a la función para mostrar el temporizador
+        showCountdown();
+    </script>
+</body>
+</html>
